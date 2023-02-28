@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// eslint-disable-next-line no-unused-vars
 import styles from './Register.module.css';
 import StepPhoneEmail from '../Steps/StepPhoneEmail/StepPhoneEmail';
 import StepOtp from '../Steps/StepOtp/StepOtp';

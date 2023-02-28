@@ -12,7 +12,7 @@ const Navigation = () => {
         alignItems: 'center',
     };
 
-    const logoText = { 
+    const logoText = {
         marginLeft: '10px',
     };
 
