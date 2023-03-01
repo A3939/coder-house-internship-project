@@ -11,7 +11,7 @@ const corsOption = {
 app.use(cors(corsOption));
 
 const PORT = process.env.PORT || 5500;
-// DbConnect();
+DbConnect();
 app.use(express.json());
 app.use(router);
 

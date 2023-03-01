@@ -50,19 +50,18 @@ class AuthController {
         }
 
         let user;
-        // try {
-        //     user = await userService.findUser({ phone });
-        //     if (!user) {
-        //         user = await userService.createUser({ phone });
-        //     }
-        // } catch (err) {
-        //     console.log(err);
-        //     res.status(500).json({ message: 'Db error' });
-        // }
+        try {
+            user = await userService.findUser({ phone });
+            if (!user) {
+                user = await userService.createUser({ phone });
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ message: 'Db error' });
+        }
 
         const { accessToken, refreshToken } = tokenService.generateTokens({
-            // _id: user._id,
-            _id: "3939",
+            _id: user._id,
             activated: false,
         });
 
@@ -70,9 +69,8 @@ class AuthController {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
         });
-        // const userDto = new UserDto(user);
-        // res.json({ accessToken, user: userDto });
-        res.json({ accessToken });
+        const userDto = new UserDto(user);
+        res.json({ accessToken, user: userDto });
     }
 }
 
