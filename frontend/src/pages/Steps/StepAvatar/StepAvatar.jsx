@@ -46,7 +46,7 @@ const StepAvatar = ({ onNext }) => {
         return () => {
             setUnMounted(true);
         }
-    })
+    },[])
 
     if(loading) return <Loader message="Activation in progress..."/>
     return (
