@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useWebRTC } from '../../hooks/useWebRTC';
 import { useParams, useHistory } from 'react-router-dom';
-import { getRoom } from '../../http';
+import { getRoom, deleteRoom } from '../../http';
 
 import styles from './Room.module.css';
 
@@ -37,6 +37,11 @@ const Room = () => {
         history.push('/rooms');
     };
 
+    const deleteRoomById = () => {
+        deleteRoom(roomId);
+        history.push('/rooms');
+        
+    };
     const handleMuteClick = (clientId) => {
         if (clientId !== user.id) return;
         setMuted((prev) => !prev);
@@ -63,6 +68,13 @@ const Room = () => {
                         >
                             <img src="/images/win.png" alt="win-icon" />
                             <span>Leave quietly</span>
+                        </button>
+                        <button
+                            onClick={deleteRoomById}
+                            className={styles.actionBtn}
+                        >
+                            <img src="/images/win.png" alt="win-icon" />
+                            <span>Delete</span>
                         </button>
                     </div>
                 </div>

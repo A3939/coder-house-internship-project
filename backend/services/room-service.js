@@ -23,5 +23,10 @@ class RoomService {
         const room = await RoomModel.findOne({ _id: roomId });
         return room;
     }
+
+    async deleteRoom(roomId){
+        const room = await RoomModel.deleteMany({ _id: roomId });
+        return room;
+    }
 }
 module.exports = new RoomService();
