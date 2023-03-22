@@ -69,11 +69,12 @@ const Room = () => {
                             <img src="/images/win.png" alt="win-icon" />
                             <span>Leave quietly</span>
                         </button>
-                        <button
+                        
+                        <button    
                             onClick={deleteRoomById}
                             className={styles.actionBtn}
                         >
-                            <img src="/images/win.png" alt="win-icon" />
+                            <img className={styles.deleteBtn} src="/images/trash.png" alt="trash-icon" />
                             <span>Delete</span>
                         </button>
                     </div>

@@ -82,6 +82,9 @@
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
+.deleteBtn{
+    width: 22px;
+}
 
 .actionBtn:hover {
     background: #333333;
