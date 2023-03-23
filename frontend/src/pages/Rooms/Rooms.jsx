@@ -3,7 +3,7 @@ import AddRoomModal from '../../components/AddRoomModal/AddRoomModal';
 import RoomCard from '../../components/RoomCard/RoomCard';
 import styles from './Rooms.module.css';
 import { getAllRooms } from '../../http';
-
+import { useSelector } from 'react-redux';
 // const rooms = [
 //     {
 //         id: 1,
@@ -78,11 +78,19 @@ import { getAllRooms } from '../../http';
 const Rooms = () => {
     const [showModal, setShowModal] = useState(false);
     const [rooms, setRooms] = useState([]);
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         const fetchRooms = async () => {
             const { data } = await getAllRooms();
-            setRooms(data);
+            
+            const roomData = data.filter((element) => {
+                return element.ownerId.id === user.id || element.roomType === 'open';
+            })
+            setRooms(roomData);
+            // console.log(roomData)
+            // console.log(data)
+            // console.log(user)
         };
         fetchRooms();
     }, []);
