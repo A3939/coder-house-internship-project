@@ -88,9 +88,9 @@ const Rooms = () => {
                 return element.ownerId.id === user.id || element.roomType === 'open';
             })
             setRooms(roomData);
-            // console.log(roomData)
-            // console.log(data)
-            // console.log(user)
+            console.log(roomData)
+            console.log(data)
+            console.log(user)
         };
         fetchRooms();
     }, []);
