@@ -7,23 +7,24 @@ import { verifyOtp } from '../../../http';
 import { useSelector } from 'react-redux';
 import { setAuth } from '../../../store/authSlice';
 import { useDispatch } from 'react-redux';
-
+import { showToaster } from "../../../components/Toaster/showToaster";
 const StepOtp = () => {
     const [otp, setOtp] = useState('');
-    const dispatch = useDispatch();
-    const { phone, hash } = useSelector((state) => state.auth.otp);
-    async function submit() {
-        if (!otp || !phone || !hash) return;
-        try {
-            const { data } = await verifyOtp({ otp, phone, hash });
-            dispatch(setAuth(data));
-        } catch (err) {
-            console.log(err);
-        }
+  const dispatch = useDispatch();
+  const { phone, hash } = useSelector((state) => state.auth.otp);
+  async function submit() {
+    if (!otp || !phone || !hash) return;
+    try {
+      const { data } = await verifyOtp({ otp, phone, hash });
+      dispatch(setAuth(data));
+    } catch (err) {
+      showToaster("Please enter valid OTP!", "error");
+      console.log(err);
     }
-    return (
-        <>
-            <div className={styles.cardWrapper}>
+  }
+  return (
+    <>
+      <div className={styles.cardWrapper}>
                 <Card
                     title="Enter the code we just texted you"
                     icon="lock-emoji"
@@ -32,17 +33,17 @@ const StepOtp = () => {
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                     />
-                    <div className={styles.actionButtonWrap}>
-                        <Button onClick={submit} text="Next" />
-                    </div>
-                    <p className={styles.bottomParagraph}>
+          <div className={styles.actionButtonWrap}>
+            <Button onClick={submit} text="Next" />
+          </div>
+          <p className={styles.bottomParagraph}>
                         By entering your number, you’re agreeing to our Terms of
                         Service and Privacy Policy. Thanks!
-                    </p>
-                </Card>
-            </div>
-        </>
-    );
+          </p>
+        </Card>
+      </div>
+    </>
+  );
 };
 
 export default StepOtp;
